@@ -95,12 +95,12 @@ WSGI_APPLICATION = 'Brigade.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Dashboard-Db',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_db',
+        'USER': 'django_user',
+        'PASSWORD': 'Pa$$word',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '3306',
     }
 }
 
