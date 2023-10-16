@@ -22,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run database migrations
-        working-directory: brigade1/Brigade
+        working-directory: Brigade/
         run: python manage.py migrate
 
       - name: Run tests
