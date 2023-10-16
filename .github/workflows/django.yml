@@ -21,8 +21,24 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run Ansible Playbook
-        run: ansible-playbook mysql.yml
+      - name: Set up MySQL
+        run: |
+          sudo apt update
+          sudo apt install -y mysql-server
+
+      - name: Start MySQL Service
+        run: sudo service mysql start
+
+      - name: Create MySQL Database
+        run: |
+          echo "CREATE DATABASE django_db;" | sudo mysql
+          echo "FLUSH PRIVILEGES;" | sudo mysql
+
+      - name: Create MySQL User
+        run: |
+          echo "CREATE USER 'django_user'@'localhost' IDENTIFIED BY 'pa$$word';" | sudo mysql
+          echo "GRANT ALL PRIVILEGES ON django_db.* TO 'django_user'@'localhost';" | sudo mysql
+          echo "FLUSH PRIVILEGES;" | sudo mysql
 
       - name: Run database migrations
         working-directory: Brigade/
