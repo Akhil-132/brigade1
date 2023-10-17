@@ -9,6 +9,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      db:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: root_password
+          MYSQL_DATABASE: django_db
+          MYSQL_USER: django_user
+          MYSQL_PASSWORD: pa$$word
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -20,25 +30,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Set up MySQL
-        run: |
-          sudo apt update
-          sudo apt install -y mysql-server
-
-      - name: Start MySQL Service
-        run: sudo service mysql start
-
-      - name: Create MySQL Database
-        run: |
-          echo "CREATE DATABASE django_db;" | sudo mysql -u root
-          echo "FLUSH PRIVILEGES;" | sudo mysql - u root
-
-      - name: Create MySQL User
-        run: |
-          echo "CREATE USER 'django_user'@'localhost' IDENTIFIED BY 'pa$$word';" | sudo mysql -u root
-          echo "GRANT ALL PRIVILEGES ON django_db.* TO 'django_user'@'localhost';" | sudo mysql -u root
-          echo "FLUSH PRIVILEGES;" | sudo mysql - u root
 
       - name: Run database migrations
         working-directory: Brigade/
