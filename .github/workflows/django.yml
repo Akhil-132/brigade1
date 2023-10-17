@@ -40,5 +40,6 @@ jobs:
         run: python manage.py migrate
 
       - name: Run tests
+        working-directory: Brigade/
         run: python manage.py test
 
