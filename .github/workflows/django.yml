@@ -33,7 +33,7 @@ jobs:
 
       - name: Grant privileges to user
         run: |
-          mysql -h 127.0.0.1 -u root -proot_password -e "GRANT ALL PRIVILEGES ON django_db.* TO 'django_user'@'%' IDENTIFIED BY 'pa$$word';"
+          mysql -h 127.0.0.1 -u root -proot_password -e "GRANT ALL PRIVILEGES ON django_db.* TO 'django_user'@'%' IDENTIFIED BY 'pa\$\$word';"
       
       - name: Run database migrations
         working-directory: Brigade/
