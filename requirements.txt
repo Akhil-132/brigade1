@@ -1,4 +1,4 @@
 django
 django-embed-video
 pillow
-mysqlclient
+mysqlclient==2.2.0
